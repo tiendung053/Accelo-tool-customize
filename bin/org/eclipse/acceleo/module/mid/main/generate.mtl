@@ -1,0 +1,135 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+
+[template public generateElement(aClass : Class)] 
+[comment @main /]
+[file (aClass.name.concat('Model.java'), false)]
+package hnue.it.shoppingonline;
+
+public class [aClass.name.toUpperFirst()/]Model {
+	[for (p: Property | aClass.attribute)]
+	 private [p.type.name/] [p.name/];
+	[/for]
+	[comment Ham tao mac dinh/]
+	 public [aClass.name.toUpperFirst()/](){}
+	[comment Ham tao day du tham so/]
+	[for (p: Property | aClass.attribute)][/for]
+   	 public [aClass.name.toUpperFirst()/]([for (p: Property | aClass.attribute) separator(', ')][p.type.name/] [p.name/][/for])
+	 {
+		[for (p: Property | aClass.attribute) separator('\n')]
+	     this.[p.name/] = [p.name/];
+	    [/for]
+	 }
+ 
+    [for (p: Property | aClass.attribute) separator('\n')]
+     public [p.type.name/] get[p.name.toUpperFirst()/]() {
+       return this.[p.name/];
+     }
+	 public void set[p.name.toUpperFirst()/](){
+		this.[p.name/] = [p.name/];
+	 }
+    [/for]
+	
+    [for (o: Operation | aClass.ownedOperation) separator('\n')]
+     public [o.type.name/] [o.name/]() {
+       // TODO should be implemented
+     }
+    [/for]
+
+	[comment Ham hien thi/]
+	 public void Output()
+	 {
+		[for (p: Property | aClass.attribute) separator('\n')]
+	     System.out.println([p.name/]);
+	   	[/for]
+	 }
+}
+[/file]
+[/template]
+
+[template public generateView(aClass : Class)] 
+[comment @main /]
+[file (aClass.name.concat('View.java'), false)]
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+ 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+ 
+public class [aClass.name/]View {
+ 
+    private JFrame mainFrame;
+    private JLabel headerLabel;
+    private JLabel statusLabel;
+    private JPanel controlPanel;
+ 
+    public [aClass.name/]View(){
+       prepareGUI();
+    }
+ 
+    private void prepareGUI() {
+        mainFrame = new JFrame("[aClass.name/]");
+        mainFrame.setSize(400, 300);
+        mainFrame.setLayout(new GridLayout(3, 1));
+        mainFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
+        headerLabel = new JLabel("", JLabel.CENTER);
+        statusLabel = new JLabel("", JLabel.CENTER);
+        statusLabel.setSize(350, 100);
+        controlPanel = new JPanel();
+        controlPanel.setLayout(new FlowLayout());
+        mainFrame.add(headerLabel);
+        mainFrame.add(controlPanel);
+        mainFrame.add(statusLabel);
+        mainFrame.setVisible(true);
+    }
+
+    void showTextFieldDemo() {
+        headerLabel.setText("[aClass.name/]");
+		[for (p: Property | aClass.attribute) separator('\n')]
+        	JLabel nameLabel[p.name/] = new JLabel("[p.name/]:", JLabel.RIGHT);
+			 final JTextField nameText[p.name/] = new JTextField(3);
+	   	[/for]
+        JButton addButton = new JButton("Add");
+		JButton editButton = new JButton("Edit");
+		JButton deleteButton = new JButton("Delete");
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+			[for (p: Property | aClass.attribute) separator('\n')]
+                String data[p.name/] = "[p.name/]:" + nameText[p.name/].getText();
+                statusLabel.setText(data[p.name/]);
+			[/for]
+            }
+        });
+		deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+				[for (p: Property | aClass.attribute) separator('\n')]
+                String data[p.name/] = " ";
+                statusLabel.setText(data[p.name/]);
+			[/for]
+            }
+        });
+		[for (p: Property | aClass.attribute) separator('\n')]
+		 controlPanel.add(nameLabel[p.name/]);
+		 controlPanel.add(nameText[p.name/]);
+		[/for]
+        controlPanel.add(addButton);
+		controlPanel.add(editButton);
+		controlPanel.add(deleteButton);
+        mainFrame.setVisible(true);
+    }
+}
+[/file]
+[/template]

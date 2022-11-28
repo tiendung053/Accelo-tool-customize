@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.example.onlineshoppingmodel/src" modelPluginID="org.eclipse.example.onlineshoppingmodel"
+    modelName="Onlineshopping" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>onlineshopping.ecore</foreignModel>
+  <genPackages prefix="Midterm" disposableProviderFactory="true" ecorePackage="onlineshopping.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="onlineshopping.ecore#//UserState">
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//UserState/New"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//UserState/Active"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//UserState/Blocked"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//UserState/Banned"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="onlineshopping.ecore#//OrderStatus">
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//OrderStatus/New"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//OrderStatus/Hold"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//OrderStatus/Shipped"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//OrderStatus/Delivered"/>
+      <genEnumLiterals ecoreEnumLiteral="onlineshopping.ecore#//OrderStatus/Closed"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//Address"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//Phone"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//Price"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//Supplier"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//Real"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//String"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//Date"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//boolean"/>
+    <genDataTypes ecoreDataType="onlineshopping.ecore#//int"/>
+    <genClasses ecoreClass="onlineshopping.ecore#//Account">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Account/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Account/billing_address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Account/is_closed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Account/open"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Account/closed"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Account/customer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Account/payment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Account/shoppingcart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Account/order"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//Customer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Customer/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Customer/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Customer/phone"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Customer/email"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Customer/account"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Customer/webuser"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//Payment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Payment/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Payment/paid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Payment/total"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Payment/details"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Payment/account"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Payment/order"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//Order">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Order/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Order/ordered"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Order/shipped"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Order/ship_to"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Order/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Order/total"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Order/payment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Order/account"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Order/lineitem"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//LineItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//LineItem/quantity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//LineItem/price"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//LineItem/order"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//LineItem/shoppingcart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//LineItem/product"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//Product">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Product/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Product/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//Product/supplier"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//Product/lineitem"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//ShoppingCart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//ShoppingCart/created"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//ShoppingCart/account"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//ShoppingCart/lineitem"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//ShoppingCart/webuser"/>
+    </genClasses>
+    <genClasses ecoreClass="onlineshopping.ecore#//WebUser">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//WebUser/login"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//WebUser/password"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute onlineshopping.ecore#//WebUser/state"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//WebUser/customer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference onlineshopping.ecore#//WebUser/shoppingcart"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

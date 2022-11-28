@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+	xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="midterm"
+	nsURI="http:///org/eclipse/example/onlineshoppingmodel"
+	nsPrefix="org.eclipse.example.onlineshoppingmodel">
+	<eClassifiers xsi:type="ecore:EClass" name="Account">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="id" eType="#//String" iD="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="billing_address" eType="#//Address" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="is_closed" eType="#//boolean" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="open" eType="#//Date" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="closed" eType="#//Date" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="customer" lowerBound="1" eType="#//Customer" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="payment" upperBound="-1" eType="#//Payment" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="shoppingcart" lowerBound="1" eType="#//ShoppingCart" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="order" upperBound="-1" eType="#//Order" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Customer">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="id" eType="#//String" iD="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="address" eType="#//Address" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="phone" eType="#//Phone" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="email" eType="#//String" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="account" lowerBound="1" eType="#//Account" containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="webuser" eType="#//WebUser" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Payment">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="id" eType="#//String" iD="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="paid" eType="#//Date" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="total" eType="#//Real" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="details" eType="#//String" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="account" lowerBound="1" eType="#//Account" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="order" lowerBound="1" eType="#//Order" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Order">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="number" eType="#//String" iD="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="ordered" eType="#//Date" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="shipped" eType="#//Date" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="ship_to" eType="#//Address" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="status" eType="#//OrderStatus" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="total" eType="#//Real" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="payment" eType="#//Payment" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="account" lowerBound="1" eType="#//Account" containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="lineitem" eType="#//LineItem" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="LineItem">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="quantity" eType="#//int" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="price" eType="#//Price" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="order" lowerBound="1" eType="#//Order" containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="shoppingcart" lowerBound="1" eType="#//ShoppingCart" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="product" lowerBound="1" eType="#//Product" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="Product">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="id" eType="#//String" iD="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="name" eType="#//String" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="supplier" eType="#//Supplier" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="lineitem" eType="#//LineItem" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="ShoppingCart">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="created" eType="#//Date" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="account" lowerBound="1" eType="#//Account" containment="true" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="lineitem" eType="#//LineItem" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="webuser" lowerBound="1" eType="#//WebUser" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="WebUser">
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="login" eType="#//String" iD="true" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="password" eType="#//String" />
+		<eStructuralFeatures xsi:type="ecore:EAttribute"
+			name="state" eType="#//UserState" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="customer" lowerBound="1" eType="#//Customer" />
+		<eStructuralFeatures xsi:type="ecore:EReference"
+			name="shoppingcart" eType="#//ShoppingCart" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EDataType" name="Address"
+		instanceClassName="java.lang.String" />
+	<eClassifiers xsi:type="ecore:EDataType" name="Phone"
+		instanceClassName="java.lang.String" />
+	<eClassifiers xsi:type="ecore:EDataType" name="Price"
+		instanceClassName="double" />
+	<eClassifiers xsi:type="ecore:EDataType" name="Supplier"
+		instanceClassName="java.lang.String" />
+	<eClassifiers xsi:type="ecore:EDataType" name="Real"
+		instanceClassName="double" />
+	<eClassifiers xsi:type="ecore:EEnum" name="UserState">
+		<eLiterals name="New" />
+		<eLiterals name="Active" value="1" />
+		<eLiterals name="Blocked" value="2" />
+		<eLiterals name="Banned" value="3" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EEnum" name="OrderStatus">
+		<eLiterals name="New" />
+		<eLiterals name="Hold" value="1" />
+		<eLiterals name="Shipped" value="2" />
+		<eLiterals name="Delivered" value="3" />
+		<eLiterals name="Closed" value="4" />
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EDataType" name="String"
+		instanceClassName="java.lang.String" />
+	<eClassifiers xsi:type="ecore:EDataType" name="Date"
+		instanceClassName="java.util.Date" />
+	<eClassifiers xsi:type="ecore:EDataType" name="boolean"
+		instanceClassName="java.lang.Boolean" />
+	<eClassifiers xsi:type="ecore:EDataType" name="int"
+		instanceClassName="java.lang.Integer" />
+</ecore:EPackage>
